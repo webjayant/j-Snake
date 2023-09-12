@@ -12,7 +12,7 @@ const Header = ({handleLogin, handleLogout, currentUser}) => {
             <div className="logo">j~Snake</div>
             <div className="btnContainer">
                 {
-                    !isLoggedin?
+                    isLoggedin?
                     <>
                         <UserDropdown handleLogout={handleLogout} currentUser={currentUser}/>
                     </>:
