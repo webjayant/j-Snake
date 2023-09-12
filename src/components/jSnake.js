@@ -120,6 +120,7 @@ const JSnake = () => {
         if (nextSnake[0][0] === fd.pos[0] && nextSnake[0][1] === fd.pos[1]) {
           return true;
         }
+        return false
       })
       return hasCollision;
     };
