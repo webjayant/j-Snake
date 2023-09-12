@@ -1,38 +1,113 @@
-.App {
-  text-align: center;
+*{
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header{
+  height: 40px;
+  width:100%;
+  display: flex;
+  background: #fff;
+  flex-grow: 1;
+  align-items: center;
+  padding: 10px 30px;
+  justify-content: space-between;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo{
+  align-self: center;
+  font-size: 30px;
+  background: linear-gradient(90.57deg, #bf1e1e 19.45%, #28f740 71.23%), linear-gradient(0deg, #FFFFFF, #FFFFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.canvasContainer{
+  width:620px;
+  margin: auto;
+  position: relative;
+}
+.canvasOverlay{
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000000c8;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
 }
 
-.App-link {
-  color: #61dafb;
+.canvasOverlay.playing{
+  transform: scale(0);
+  transition: all 0.3s ease-in-out;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.canvasOverlay .logo{
+  font-size: 100px;
+  margin: 10px;
+}
+.gameCanvas{
+  background: #1D0707;
+  border: 5px solid grey;
+  margin: auto;
+
+}
+
+.gameContainer{
+  transform: scale(0.8);
+  transition: all 0.5s ease-in-out;
+}
+
+.gameContainer.playing{
+  transform: scale(1);
+  transition: all 0.5s ease-in-out;
+}
+
+.btnContainer{
+  display: flex;
+}
+
+.gameScore{
+  text-align: center;
+  margin: 15px 0;
+  font-size: 30px;
+  color: #28f740;
+}
+
+.gameScore .go{
+  margin: 10px;
+  font-size: 25px;
+  color: #bf1e1e;
+  font-weight: 600;
+}
+
+.btn{
+  width: 150px;
+  margin: auto;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  font-size: 25px;
+  margin: 10px;
+  transition: all .5s ease-in-out;
+}
+
+.btn.lBtn{
+  width: 110px;
+}
+
+.btn.login{
+  width: 110px;
+  font-size: 18px;
+}
+
+
+.btn:hover,
+.btn.active{
+  background: linear-gradient(90.57deg, #bf1e1e 19.45%, #28f740 71.23%), linear-gradient(0deg, #FFFFFF, #FFFFFF);
+  transition: all .3s ease-in-out;
 }

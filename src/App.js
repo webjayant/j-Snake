@@ -1,25 +1,20 @@
-import logo from './logo.svg';
+
+import JSnake from "./components/jSnake";
+import Header from "./components/Header";
 import './App.css';
+import netlifyIdentity from 'netlify-identity-widget'
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const handleLogin = () => {
+      netlifyIdentity.open()
+  }
+  return(
+    <>
+      <Header handleLogin={handleLogin}/>
+      <JSnake />
+    </>
+  )
 }
 
 export default App;

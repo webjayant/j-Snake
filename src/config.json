@@ -1,0 +1,169 @@
+{
+    "canvas_height": 600,
+    "canvas_width": 600,
+    "canvas_scale": 20,
+    "initial_snake": [
+        [
+            5,
+            16
+        ],
+        [
+            5,
+            17
+        ]
+    ],
+    "game_types": [
+        "survival",
+        "words"
+    ],
+    "games": {
+        "survival": {
+            "total_levels": 1,
+            "initial_food":[
+                {
+                    "pos": [
+                        8,
+                        3
+                    ],
+                    "point": 10
+                }
+            ],
+            "levels": [
+                {
+                    "inital_speed": 300,
+                    "score_devider": 100,
+                    "accleration": 30,
+                    "point_accleration": 10
+                },
+                {
+                    "inital_speed": 200,
+                    "score_devider": 200,
+                    "accleration": 30,
+                    "point_accleration": 10
+                },
+                {
+                    "inital_speed": 100,
+                    "score_devider": 500,
+                    "accleration": 30,
+                    "point_accleration": 10
+                }
+            ]
+        },
+        "words": {
+            "total_levels": 5,
+            "level_devider": 1000,
+            "levels": [
+                {
+                    "inital_speed": 300,
+                    "score_devider": 100,
+                    "accleration": 10,
+                    "point_accleration": 0,
+                    "word_point":30,
+                    "word_length":3,
+                    "words": [
+                        "Ace",
+                        "Aid",
+                        "Aim",
+                        "Air",
+                        "Ale",
+                        "Arm",
+                        "Art",
+                        "Awl",
+                        "Eel",
+                        "Ear",
+                        "Era",
+                        "Ice",
+                        "Ire",
+                        "Ilk",
+                        "Oar",
+                        "Oak",
+                        "Oat",
+                        "Oil",
+                        "Ore",
+                        "Owl",
+                        "Urn",
+                        "Web",
+                        "Cab",
+                        "Dab",
+                        "Jab",
+                        "Lab",
+                        "Tab",
+                        "Dad",
+                        "Fad",
+                        "Lad",
+                        "Mad",
+                        "Bag",
+                        "Gag",
+                        "Hag"
+                    ]
+                },
+                {
+                    "inital_speed": 200,
+                    "score_devider": 100,
+                    "accleration": 10,
+                    "point_accleration": 0,
+                    "word_point":40,
+                    "word_length":4,
+                    "words": [
+                        "Area",
+                        "Army",
+                        "Baby",
+                        "Back",
+                        "Ball",
+                        "Band",
+                        "Bank",
+                        "Base",
+                        "Bill",
+                        "Body",
+                        "Book",
+                        "Call",
+                        "Card",
+                        "Care",
+                        "Case",
+                        "Cash",
+                        "City",
+                        "Club",
+                        "Cost",
+                        "Date",
+                        "Deal",
+                        "Door",
+                        "Duty",
+                        "East",
+                        "Edge",
+                        "Face"
+                    ]
+                },
+                {
+                    "inital_speed": 200,
+                    "score_devider": 100,
+                    "accleration": 10,
+                    "point_accleration": 0,
+                    "word_point":50,
+                    "word_length":5,
+                    "words": [
+                        "Grape",
+                        "Green",
+                        "Happy",
+                        "Heart",
+                        "House",
+                        "Juice",
+                        "Light",
+                        "Money",
+                        "Music",
+                        "Party",
+                        "Pizza",
+                        "Plant",
+                        "Radio",
+                        "River",
+                        "Salad",
+                        "Sheep",
+                        "Shoes",
+                        "Smile",
+                        "Snack",
+                        "Snake"
+                    ]
+                }
+            ]
+        }
+    }
+}
