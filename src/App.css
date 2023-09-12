@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+body{
+  overflow-x: hidden;
+}
+
 .header{
   height: 40px;
   width:100%;
@@ -18,6 +22,7 @@
   font-size: 30px;
   background: linear-gradient(90.57deg, #bf1e1e 19.45%, #28f740 71.23%), linear-gradient(0deg, #FFFFFF, #FFFFFF);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -93,6 +98,7 @@
   border-radius: 5px;
   font-size: 25px;
   margin: 10px;
+  cursor: pointer;
   transition: all .5s ease-in-out;
 }
 
@@ -110,4 +116,51 @@
 .btn.active{
   background: linear-gradient(90.57deg, #bf1e1e 19.45%, #28f740 71.23%), linear-gradient(0deg, #FFFFFF, #FFFFFF);
   transition: all .3s ease-in-out;
+}
+
+.userDetails{
+  height: 30px;
+  width: 30px;
+}
+.userDetails img{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.userDropdown{
+  background: #fff;
+  width: 200px;
+  position: absolute;
+  top:40px;
+  right:-250px;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  transition: all .5s ease-in-out;
+}
+
+.userDropdown.open{
+  right: 0;
+  transition: all .5s ease-in-out;
+}
+
+
+.userDropdown img{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+.userDropdown p{
+  margin: 10px 0;
+}
+.btn.linkBtn{
+  border: none;
+  font-size: 18px;
+  padding: 5px 0;
+  margin: 5px 0;
 }
