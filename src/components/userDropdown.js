@@ -7,16 +7,18 @@ const UserDropdown = ({currentUser, handleLogout}) => {
         setIsDDOpen(!isDDOpen)
     }
     const showLeaderBoard = () => {
-
+        fetch('/.netlify/functions/score-board').then((response)=>{
+            console.log(response)
+        })
     }
     return (
         <>
             <div className="userDetails" onClick={()=>handleClick()}>
-                <img src="https://lh3.googleusercontent.com/a/ACg8ocL-VBCznRMPJ183d-Y1liSWfH0esgFWGd5yBPSVF2NtlBQe=s96-c" alt="" />
+                <img src={currentUser.user_metadata.avatar_url} alt="" />
             </div>
             <div className={`userDropdown ${isDDOpen?'open':null}`}>
-                <img src="https://lh3.googleusercontent.com/a/ACg8ocL-VBCznRMPJ183d-Y1liSWfH0esgFWGd5yBPSVF2NtlBQe=s96-c" alt="" />
-                <p>Name: Jayant Raj Singh</p>
+                <img src={currentUser.user_metadata.avatar_url} alt="" />
+                <p>Name:{currentUser.user_metadata.full_name}</p>
                 <p>Highest Score: xxx</p>
                 <button className='btn linkBtn' onClick={()=>handleLogout()}>Logout</button>
                 <button className='btn linkBtn' onClick={()=>showLeaderBoard()}>Leader Board</button>

@@ -15,13 +15,13 @@ const createFaunaDB = async function () {
 
   /* Based on your requirements, change the schema here */
   try {
-    await client.query(query.CreateCollection({ name: 'items' }))
+    await client.query(query.CreateCollection({ name: 'userScores' }))
 
     console.log('Created items class')
     return await client.query(
       query.CreateIndex({
-        name: 'all_items',
-        source: query.Collection('items'),
+        name: 'all_userScores',
+        source: query.Collection('userScores'),
         active: true,
       }),
     )

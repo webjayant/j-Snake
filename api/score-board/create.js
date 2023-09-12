@@ -17,7 +17,7 @@ const handler = async (event) => {
   }
   /* construct the fauna query */
   try {
-    const response = await client.query(query.Create(query.Collection('items'), item))
+    const response = await client.query(query.Create(query.Collection('userScores'), item))
     console.log('success', response)
     /* Success! return the response with statusCode 200 */
     return {
