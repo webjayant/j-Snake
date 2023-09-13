@@ -8,7 +8,7 @@ const Header = ({handleLogin, handleLogout, currentUser, isLoggedin}) => {
                 {
                     isLoggedin?
                     <>
-                        <UserDropdown handleLogout={handleLogout} currentUser={currentUser}/>
+                        <UserDropdown handleLogout={handleLogout} currentUser={currentUser} isLoggedin={isLoggedin}/>
                     </>:
                     <button className='btn login' onClick={()=>handleLogin()}>Login</button>
                 }
