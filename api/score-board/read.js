@@ -12,7 +12,7 @@ const handler = async (event) => {
   console.log(`Function 'read' invoked. Read id: ${id}`)
 
   try {
-    const response = await client.query(query.Get(query.Ref(query.Collection('items'), id)))
+    const response = await client.query(query.Get(query.Ref(query.Collection('userScores'), id)))
     console.log('success', response)
     return {
       statusCode: 200,

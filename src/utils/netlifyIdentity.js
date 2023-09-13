@@ -16,5 +16,6 @@ export function loginUser() {
   }
   
   export function logoutUser() {
+    netlifyIdentity.logout()
     localStorage.removeItem("currentUser");
   }

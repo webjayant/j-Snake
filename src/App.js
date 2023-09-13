@@ -19,10 +19,13 @@ function App() {
 
  useEffect(()=>{
   if(isLoggedin){
-    const user = localStorage.getItem("currentUser");
+    const user = localStorage.getItem("gotrue.user");
     console.log(user, 'usr')
     if (user) {
-      setCurrentUser(JSON.parse(user))
+      const {
+        app_metadata, created_at, confirmed_at, email, id, user_metadata
+      } = JSON.parse(user)
+      setCurrentUser({...app_metadata, created_at, confirmed_at, email, id, ...user_metadata})
     }
   }
  },[isLoggedin])
