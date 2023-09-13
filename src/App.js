@@ -8,20 +8,26 @@ import './App.css';
 
 function App() {
   const [currentUser, setCurrentUser] = useState()
+  const [isLoggedin, setIsLoggedin] = useState(false)
 
   netlifyIdentity.on('login', ()=>{
-     const user = localStorage.getItem("currentUser");
-      console.log(user, 'usr')
-      if (user) {
-        setCurrentUser(JSON.parse(user))
-      }
+    setIsLoggedin(true)
   })
   netlifyIdentity.on('logout', ()=>{
-       setCurrentUser(null)
+    setIsLoggedin(true)
  })
+
+ useEffect(()=>{
+    const user = localStorage.getItem("currentUser");
+    console.log(user, 'usr')
+    if (user) {
+      setCurrentUser(JSON.parse(user))
+    }
+ },[JSON.parse(localStorage.getItem('currentUser'))])
+
   return(
     <>
-      <Header handleLogin={loginUser} handleLogout={logoutUser} currentUser={currentUser}/>
+      <Header handleLogin={loginUser} handleLogout={logoutUser} currentUser={currentUser} isLoggedin={isLoggedin}/>
       <JSnake />
     </>
   )
