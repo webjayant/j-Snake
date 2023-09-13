@@ -14,16 +14,18 @@ function App() {
     setIsLoggedin(true)
   })
   netlifyIdentity.on('logout', ()=>{
-    setIsLoggedin(true)
+    setIsLoggedin(false)
  })
 
  useEffect(()=>{
+  if(isLoggedin){
     const user = localStorage.getItem("currentUser");
     console.log(user, 'usr')
     if (user) {
       setCurrentUser(JSON.parse(user))
     }
- },[JSON.parse(localStorage.getItem('currentUser'))])
+  }
+ },[isLoggedin])
 
   return(
     <>
