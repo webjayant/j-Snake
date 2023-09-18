@@ -26,7 +26,7 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
     }
     return (
         <>
-            <div className="userDetails" onClick={()=>handleClick()}>
+            {isLoggedin?<><div className="userDetails" onClick={()=>handleClick()}>
                 <img src={isLoggedin&&currentUser?.avatar_url} alt="" />
             </div>
             <div className={`userDropdown ${isDDOpen?'open':null}`}>
@@ -35,7 +35,7 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
                 <p>Highest Score: {highScore}</p>
                 <button className='btn linkBtn' onClick={()=>handleLogout()}>Logout</button>
                 <button className='btn linkBtn' onClick={()=>showLeaderBoard()}>Leader Board</button>
-            </div>
+            </div></>:<button className='btn linkBtn' onClick={()=>showLeaderBoard()}>Leader Board</button>}
             <div className={`userDropdown scoreBoard ${isLBOpen?'open':null}`}>
                 <p>Leader Board ({!isLoggedin&&'Login to join'})</p>
                 {

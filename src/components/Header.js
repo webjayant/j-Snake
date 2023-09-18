@@ -5,13 +5,8 @@ const Header = ({handleLogin, handleLogout, currentUser, isLoggedin}) => {
         <div className='header'>
             <div className="logo">j~Snake</div>
             <div className="btnContainer">
-                {
-                    isLoggedin?
-                    <>
-                        <UserDropdown handleLogout={handleLogout} currentUser={currentUser} isLoggedin={isLoggedin}/>
-                    </>:
-                    <button className='btn login' onClick={()=>handleLogin()}>Login</button>
-                }
+                {!isLoggedin&&<button className='btn login' onClick={()=>handleLogin()}>Login</button>}
+                <UserDropdown handleLogout={handleLogout} currentUser={currentUser} isLoggedin={isLoggedin}/>
             </div>
         </div>
     );
