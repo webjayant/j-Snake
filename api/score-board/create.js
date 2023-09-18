@@ -20,13 +20,13 @@ const handler = async (event) => {
     const response = await client.query(query.Get(query.Match(query.Index('user_Score_By_Email'), item.data.email)))
     console.log(response, 'get item rsp')
     if(response.data && response.data.email === item.data.email){
-      const updateResponse = query.Update(response.ref, item)
+      const updateResponse = await client.query(query.Update(response.ref, item))
       return {
         statusCode: 200,
         body: JSON.stringify(updateResponse),
       }
     }else{
-      const createResponse = query.Create(query.Collection('userScores'), item)
+      const createResponse = await client.query(query.Create(query.Collection('userScores'), item))
       return {
         statusCode: 200,
         body: JSON.stringify(createResponse),
