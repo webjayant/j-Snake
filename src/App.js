@@ -47,6 +47,7 @@ function App() {
       const {
         app_metadata, created_at, confirmed_at, email, id, user_metadata
       } = JSON.parse(user)
+      getLastHighScore(email)
       setCurrentUser({...app_metadata, created_at, confirmed_at, email, id, ...user_metadata})
     }
   }
@@ -58,7 +59,6 @@ function App() {
   getLeaderBoard()
   if (user) {
     setIsLoggedin(true)
-    getLastHighScore(user.email)
   }
  },[])
 

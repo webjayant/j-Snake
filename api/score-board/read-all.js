@@ -14,7 +14,7 @@ const handler = async () => {
     const response = await client.query(query.Match(query.Index('all_userScores')))
     return {
       statusCode: 200,
-      body: JSON.stringify(response.data),
+      body: JSON.stringify(response),
     }
   } catch (error) {
     console.log('error', error)
