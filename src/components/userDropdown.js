@@ -17,8 +17,7 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
     const showLeaderBoard = () => {
         fetch('/.netlify/functions/score-board').then((response)=>{
             response.json().then((json)=>{
-                console.log(json)
-                setLeaderBoard(json.body)
+                setLeaderBoard(json)
             })
         })
         setIsLBOpen(true)
@@ -39,7 +38,7 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
             <div className={`userDropdown ${isLBOpen?'open':null}`}>
                 {
                     leaderBoard.map((item)=>{
-                        return <li key={item.email}>{item.email}:{item.score}</li>
+                        return <li key={item.data.email}>{item.data.email}:{item.data.score}</li>
                     })
                 }
             </div>
