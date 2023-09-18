@@ -10,6 +10,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(localStorage.getItem('currentUser'))
   const [isLoggedin, setIsLoggedin] = useState(false)
   const [lastHighScore, setLastHighScore] = useState(localStorage.getItem('highScore') || 0)
+  const [dataRef, setDataRef] = useState()
 
   netlifyIdentity.on('login', ()=>{
     setIsLoggedin(true)
@@ -18,16 +19,10 @@ function App() {
     setIsLoggedin(false)
  })
 
- const getLeaderBoard = () => {
-  fetch('/.netlify/functions/score-board').then((response)=>{
-      console.log(response)
-  })
- }
-
  const saveHighScore = (highScore) => {
   fetch('/.netlify/functions/score-board', {
     method: 'POST',
-    body:JSON.stringify({email: currentUser.email, score: highScore})
+    body:JSON.stringify({body:{email: currentUser.email, score: highScore}, ref: dataRef})
   }).then((response)=>{
       console.log(response)
   })
@@ -37,6 +32,7 @@ function App() {
   fetch(`/.netlify/functions/score-board/${email}`).then((response)=>{
       console.log(response)
       setLastHighScore(response.body.data.score)
+      setDataRef(response.body.ref)
   })
  }
 

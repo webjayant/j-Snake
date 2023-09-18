@@ -30,13 +30,25 @@ const createFaunaDB = async function () {
       }),
     )
 
-    return await client.query(
+    await client.query(
       query.CreateIndex({
         name: 'user_Score_By_Email',
         source: query.Collection('userScores'),
         terms: [
           {
             field:  ["data","email"]
+          }
+        ]
+      })
+    )
+
+    return await client.query(
+      query.CreateIndex({
+        name: 'fromRef',
+        source: query.Collection('userScores'),
+        terms: [
+          {
+            field:  ["ref"]
           }
         ]
       }),
