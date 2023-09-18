@@ -52,7 +52,6 @@ function App() {
  useEffect(()=>{
   const user = localStorage.getItem("gotrue.user");
   console.log(user, 'UU')
-  getLeaderBoard()
   if (user) {
     setIsLoggedin(true)
   }
