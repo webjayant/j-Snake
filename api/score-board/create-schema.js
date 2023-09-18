@@ -18,7 +18,7 @@ const createFaunaDB = async function () {
     await client.query(query.CreateCollection({ name: 'userScores' }))
 
     console.log('Created items class')
-    return await client.query(
+    await client.query(
       query.CreateIndex({
         name: 'all_userScores',
         source: query.Collection('userScores'),
@@ -32,6 +32,19 @@ const createFaunaDB = async function () {
         ]
       }),
     )
+
+    return await client.query(
+      query.CreateIndex({
+        name: 'user_Score_By_Email',
+        source: query.Collection('userScores'),
+        terms: [
+          {
+            field:  ["data","email"]
+          }
+        ]
+      }),
+    )
+
   } catch (error) {
     if (error.requestResult.statusCode === 400 && error.message === 'instance not unique') {
       console.log('DB already exists')

@@ -9,6 +9,7 @@ import './App.css';
 function App() {
   const [currentUser, setCurrentUser] = useState(localStorage.getItem('currentUser'))
   const [isLoggedin, setIsLoggedin] = useState(false)
+  const [lastHighScore, setLastHighScore] = useState(localStorage.getItem('highScore') || 0)
 
   netlifyIdentity.on('login', ()=>{
     setIsLoggedin(true)
@@ -32,6 +33,13 @@ function App() {
   })
  }
 
+ const getLastHighScore = (email) => {
+  fetch(`/.netlify/functions/score-board/${email}`).then((response)=>{
+      console.log(response)
+      setLastHighScore(response.body.score)
+  })
+ }
+
  useEffect(()=>{
   if(isLoggedin){
     const user = localStorage.getItem("gotrue.user");
@@ -47,8 +55,10 @@ function App() {
  useEffect(()=>{
   const user = localStorage.getItem("gotrue.user");
   console.log(user, 'UU')
+  getLeaderBoard()
   if (user) {
     setIsLoggedin(true)
+    getLastHighScore(user.email)
   }
  },[])
 
@@ -56,7 +66,7 @@ function App() {
   return(
     <>
       <Header handleLogin={loginUser} handleLogout={logoutUser} currentUser={currentUser} isLoggedin={isLoggedin}/>
-      <JSnake saveHighScore={saveHighScore} isLoggedin={isLoggedin}/>
+      <JSnake saveHighScore={saveHighScore} isLoggedin={isLoggedin} lastHighScore={lastHighScore} setLastHighScore={setLastHighScore}/>
     </>
   )
 }

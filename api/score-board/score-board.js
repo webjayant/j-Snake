@@ -12,10 +12,10 @@ const handler = async (event, context) => {
       if (segments.length === 0) {
         return readAllRoute.handler(event, context)
       }
-      // e.g. GET /.netlify/functions/fauna-crud/123456
+      // e.g. GET /.netlify/functions/fauna-crud/email
       if (segments.length === 1) {
-        const [id] = segments
-        event.id = id
+        const [email] = segments
+        event.email = email
         return readRoute.handler(event, context)
       }
       return {

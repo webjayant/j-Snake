@@ -5,7 +5,7 @@ import { alphabets } from '../images/alphabets';
 import GameAudio from './GameAudio';
 
 
-const JSnake = ({saveHighScore, isLoggedin}) => {
+const JSnake = ({saveHighScore, isLoggedin, lastHighScore, setLastHighScore}) => {
     const [snake, setSnake] = useState(config.initial_snake)
     const [food, setFood] = useState(config.games.survival.initial_food)
     const [snakeSpeed, setSnakeSpeed] = useState(null)
@@ -17,7 +17,6 @@ const JSnake = ({saveHighScore, isLoggedin}) => {
     const [currentWord, setCurrentWord] = useState()
     const [type, setType] = useState('survival')
     const [playAudio, setPlayAudio] = useState()
-    const [lastHighScore, setLastHighScore] = useState(localStorage.getItem('highScore') || 0)
     const Canvas = useRef();
   
     const [alphabetArr, setAlphabetArr] = useState([])
