@@ -41,6 +41,9 @@ const createFaunaDB = async function () {
         ],
         values:[
           {
+            field: ["data", "email", "score"]
+          },
+          {
             field: ["ref"]
           }
         ]
