@@ -22,7 +22,7 @@ function App() {
 
   fetch('/.netlify/functions/score-board', {
     method: 'POST',
-    body:JSON.stringify({body:{email: currentUser.email, score: highScore}, ref: dataRef})
+    body:JSON.stringify({email: currentUser.email, score: highScore})
   }).then((response)=>{
       console.log(response)
   })
