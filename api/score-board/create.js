@@ -32,6 +32,7 @@ const handler = async (event) => {
                     body: JSON.stringify(updateResponse),
                 };
             } catch (error) {
+              console.log(error, 'error after update')
                 return {
                     statusCode: 400,
                     body: JSON.stringify(error),
@@ -39,6 +40,7 @@ const handler = async (event) => {
             }
         }
     } catch (error) {
+        console.log(error, 'error after get')
         if (error.errorType === 'NotFound') {
             try {
                 const createResponse = await client.query(
@@ -49,6 +51,7 @@ const handler = async (event) => {
                     body: JSON.stringify(createResponse),
                 };
             } catch (error) {
+              console.log(error, 'error after create')
                 return {
                     statusCode: 400,
                     body: JSON.stringify(error),
