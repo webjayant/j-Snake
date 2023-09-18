@@ -24,7 +24,7 @@ const createFaunaDB = async function () {
         source: query.Collection('userScores'),
         terms: [
           {
-            field:  ["data","score"], reverse: false
+            field:  ["data","score"]
           },
           {
             field: ["ref"]

@@ -11,7 +11,7 @@ const handler = async () => {
   console.log('Function `read-all` invoked')
 
   try {
-    const response = await client.query(query.Match(query.Index('all_userScores')))
+    const response = await client.query(query.Paginate(query.Match(query.Index('all_userScores'))))
     
     const itemRefs = response.data
     console.log(response.data, 'itemRefs')
