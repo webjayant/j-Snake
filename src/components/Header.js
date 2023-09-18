@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import UserDropdown from './userDropdown';
 const Header = ({handleLogin, handleLogout, currentUser, isLoggedin}) => { 
     return (

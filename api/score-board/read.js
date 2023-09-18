@@ -8,11 +8,11 @@ const client = new Client({
 })
 
 const handler = async (event) => {
-  const { id } = event
-  console.log(`Function 'read' invoked. Read id: ${id}`)
+  const { username } = event
+  console.log(`Function 'read' invoked. Read id: ${username}`)
 
   try {
-    const response = await client.query(query.Get(query.Ref(query.Collection('userScores'), id)))
+    const response = await client.query(query.Get(query.Ref(query.Collection('userScores'), username)))
     console.log('success', response)
     return {
       statusCode: 200,

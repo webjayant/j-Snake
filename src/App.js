@@ -7,7 +7,7 @@ import './App.css';
 
 
 function App() {
-  const [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('currentUser'))
   const [isLoggedin, setIsLoggedin] = useState(false)
 
   netlifyIdentity.on('login', ()=>{
@@ -17,10 +17,24 @@ function App() {
     setIsLoggedin(false)
  })
 
+ const getLeaderBoard = () => {
+  fetch('/.netlify/functions/score-board').then((response)=>{
+      console.log(response)
+  })
+ }
+
+ const saveHighScore = (highScore) => {
+  fetch('/.netlify/functions/score-board', {
+    method: 'POST',
+    body:JSON.stringify({email: currentUser.email, score: highScore})
+  }).then((response)=>{
+      console.log(response)
+  })
+ }
+
  useEffect(()=>{
   if(isLoggedin){
     const user = localStorage.getItem("gotrue.user");
-    console.log(user, 'usr')
     if (user) {
       const {
         app_metadata, created_at, confirmed_at, email, id, user_metadata
@@ -30,10 +44,19 @@ function App() {
   }
  },[isLoggedin])
 
+ useEffect(()=>{
+  const user = localStorage.getItem("gotrue.user");
+  console.log(user, 'UU')
+  if (user) {
+    setIsLoggedin(true)
+  }
+ },[])
+
+
   return(
     <>
       <Header handleLogin={loginUser} handleLogout={logoutUser} currentUser={currentUser} isLoggedin={isLoggedin}/>
-      <JSnake />
+      <JSnake saveHighScore={saveHighScore} isLoggedin={isLoggedin}/>
     </>
   )
 }

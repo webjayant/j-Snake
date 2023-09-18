@@ -2,10 +2,10 @@ import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import config from '../config.json'
 import { alphabets } from '../images/alphabets';
-import eating from '../audios/eating.wav'
-import gameover from '../audios/gameover.wav'
+import GameAudio from './GameAudio';
 
-const JSnake = () => {
+
+const JSnake = ({saveHighScore, isLoggedin}) => {
     const [snake, setSnake] = useState(config.initial_snake)
     const [food, setFood] = useState(config.games.survival.initial_food)
     const [snakeSpeed, setSnakeSpeed] = useState(null)
@@ -16,8 +16,9 @@ const JSnake = () => {
     const [showLevel, setShowLevel] = useState(false)
     const [currentWord, setCurrentWord] = useState()
     const [type, setType] = useState('survival')
+    const [playAudio, setPlayAudio] = useState()
+    const [lastHighScore, setLastHighScore] = useState(localStorage.getItem('highScore') || 0)
     const Canvas = useRef();
-    const AudioPlayer = useRef();
   
     const [alphabetArr, setAlphabetArr] = useState([])
   
@@ -140,7 +141,7 @@ const JSnake = () => {
       if( hasCollision.length < 1){
         nextSnake.pop()
       }else{
-        playAudio('eating')
+        setPlayAudio('eating')
         setScore(prevScore => {
           const newScore = prevScore + hasCollision[0].point
           updateFood(nextSnake, hasCollision[0], newScore, type)
@@ -220,18 +221,7 @@ const JSnake = () => {
       }
     }
 
-    const playAudio = (type) => {
-        const player = AudioPlayer.current
-        if(type === 'eating'){
-            player.src = eating
-            player.play()
-        }
-        if(type === 'gameover'){
-            player.src = gameover
-            player.play()
-        }
-    }
-  
+
     useEffect(()=>{
       let gameInterval
       if(!gameOver){
@@ -272,9 +262,25 @@ const JSnake = () => {
       })
     }
   
+    const setScoreToLocalStorage = () => {
+      const lastHighScore = localStorage.getItem('highScore') || 0
+      if(score > lastHighScore){
+        localStorage.setItem('highScore', score)
+        setLastHighScore(score)
+      }
+    }
+
+    useEffect(()=>{
+      if(playAudio === 'eating' || playAudio === 'gameover'){
+        setPlayAudio('')
+        setScoreToLocalStorage()
+      }
+    },[playAudio])
+
+
     useEffect(()=>{
         if(gameOver && score !== -1){
-            playAudio('gameover')
+            setPlayAudio('gameover')
         }
       const canvasCtx = Canvas.current.getContext('2d')
       canvasCtx.setTransform(config.canvas_scale,0,0,config.canvas_scale,0,0)
@@ -287,7 +293,10 @@ const JSnake = () => {
     return (
         <div className="canvasContainer">
             <div className={`gameContainer ${!gameOver?'playing':''}`}>
-                <p style={{color:!gameOver?'#fff':'red'}}>{score}</p>
+                <div className="topScoreContainer">
+                    <p style={{color:!gameOver?'#fff':'red'}}>Score: {(score>0&&score)|| 0}</p>
+                    <p style={{color:'#fff'}}>High Score: {lastHighScore}</p>
+                </div>
                 <canvas height={config.canvas_height} width={config.canvas_width} ref={Canvas} className='gameCanvas' ></canvas>
             </div>
             <div className={`canvasOverlay ${!gameOver?'playing':''}`}>
@@ -301,6 +310,7 @@ const JSnake = () => {
                             Game Over
                         </p>
                         {score}
+                        {isLoggedin && <button className='btn' onClick={()=>saveHighScore(score)}>Join Leader Board</button>}
                     </div>:null
                 }
                 <div className='btnContainer'>
@@ -318,7 +328,7 @@ const JSnake = () => {
                     </div>:null
                 }
             </div>
-            <audio ref={AudioPlayer} className='audioPlayback'></audio>
+            <GameAudio audioType={playAudio} />
         </div>
     );
 }
