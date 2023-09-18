@@ -140,8 +140,19 @@ body{
   justify-content: center;
   align-items: center;
   text-align: center;
-
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: all .5s ease-in-out;
+}
+
+.userDropdown.scoreBoard{
+  width: 400px;
+  padding: 15px;
+}
+
+.userDropdown.scoreBoard li{
+  list-style: none;
+  font-style: italic;
+  font-weight: 600;
 }
 
 .userDropdown.open{
