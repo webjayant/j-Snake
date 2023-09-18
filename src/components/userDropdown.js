@@ -12,7 +12,9 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
     }
 
     useEffect(()=>{
-        setHighScore(localStorage.getItem("highScore"))
+        if(!isLoggedin){
+            setHighScore(localStorage.getItem("highScore"))
+        }
     },[localStorage.getItem("highScore")])
 
     const showLeaderBoard = () => {

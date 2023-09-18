@@ -262,7 +262,6 @@ const JSnake = ({saveHighScore, isLoggedin, lastHighScore, setLastHighScore}) =>
     }
   
     const setScoreToLocalStorage = () => {
-      const lastHighScore = localStorage.getItem('highScore') || 0
       if(score > lastHighScore){
         localStorage.setItem('highScore', score)
         setLastHighScore(score)
