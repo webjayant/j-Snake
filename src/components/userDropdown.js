@@ -17,6 +17,7 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
     const showLeaderBoard = () => {
         fetch('/.netlify/functions/score-board').then((response)=>{
             response.json().then((json)=>{
+                console.log(json)
                 setLeaderBoard(json.body)
             })
         })
