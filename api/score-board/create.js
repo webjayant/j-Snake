@@ -17,7 +17,7 @@ const handler = async (event) => {
   }
   /* construct the fauna query */
   try {
-    const response = await client.query(query.Let({match: query.Match(query.Index('user_Score_By_Email', item.data.email)), data:item},query.If(query.Exists(query.Var('match')),query.Update(query.Select('ref', query.Get(query.Var('match'))), query.Var('data')),query.Create(query.Collection('userScores'), query.Var('data')))))
+    const response = await client.query(query.Let({match: query.Match(query.Index('user_Score_By_Email_ref', item.data.email)), data:item},query.If(query.Exists(query.Var('match')),query.Update(query.Select('ref', query.Get(query.Var('match'))), query.Var('data')),query.Create(query.Collection('userScores'), query.Var('data')))))
     console.log('success', response)
     /* Success! return the response with statusCode 200 */
     return {
