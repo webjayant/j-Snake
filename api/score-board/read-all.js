@@ -14,6 +14,7 @@ const handler = async () => {
     const response = await client.query(query.Match(query.Index('all_userScores')))
     
     const itemRefs = response.data
+    console.log(response, 'itemRefs')
     // create new query out of item refs. http://bit.ly/2LG3MLg
     const getAllItemsDataQuery = itemRefs.map((ref) => query.Get(ref))
     // then query the refs
