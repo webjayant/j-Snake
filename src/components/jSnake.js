@@ -39,29 +39,25 @@ const JSnake = () => {
       setSnakeSpeed(config.games[type].levels[level].inital_speed)
   
     }
-  
-    const getRandomWord = (level) => {
-        const words = config.games.words.levels[level].words
-        const rndIndex = Math.floor((Math.random() * words.length))
-        return words[rndIndex]
-    }
 
     const endGame = () => {
       updateEventListeners('remove')
       setGameOver(true)
       setSnakeSpeed(null)
     }
-  
+    
+    const getRandomWord = (level) => {
+        const words = config.games.words.levels[level].words
+        const rndIndex = Math.floor((Math.random() * words.length))
+        return words[rndIndex]
+    }
+
+
     const createFood = (type, letter) =>{
       let newFood = JSON.parse(JSON.stringify(food[0]))
       let newFoodPosition = newFood.pos.map((axis, index) => Math.floor(Math.random() * ((index>0? config.canvas_width:config.canvas_height) / config.canvas_scale)));
       newFood.pos = newFoodPosition
-      const {isBonus, bonusData} = getBonus()
-      newFood.isBonus = isBonus
-      
-      if(isBonus){
-        newFood.bonusData = bonusData
-      }
+    
       if(type === 'words'){
         newFood.letter = letter
       }
@@ -69,7 +65,6 @@ const JSnake = () => {
     }
   
     const getPoint = (type, level, point, updatedScore) => {
-      console.log(type, level, point, updatedScore)
       if(type === 'words'){
         return config.games[type].levels[level].word_point/ config.games[type].levels[level].word_length
       }else{
@@ -81,12 +76,6 @@ const JSnake = () => {
       return (updatedScore % config.games[type].levels[level].score_devider === 0)?speed-config.games[type].levels[level].accleration:speed
     }
     
-    const getBonus = () =>{
-      return {
-        isBonus:false
-      }
-    }
-  
     const createNewFood = (nextSnake, prevPoint, updatedScore, type, word) => {
       let foods = []
       if(type==='words'){
@@ -154,25 +143,29 @@ const JSnake = () => {
         playAudio('eating')
         setScore(prevScore => {
           const newScore = prevScore + hasCollision[0].point
-          if(type==='words'){
-            setAlphabetArr([...alphabetArr,hasCollision[0].letter])
-            clearLetter(hasCollision[0])
+          updateFood(nextSnake, hasCollision[0], newScore, type)
+          return newScore
+        })
+      }
+      setSnake(nextSnake)
+    }
+
+    const updateFood = (nextSnake, collidedItem, newScore, type) => {
+      if(type==='words'){
+            setAlphabetArr([...alphabetArr,collidedItem.letter])
+            clearLetter(collidedItem)
             if(newScore % config.games[type].levels[level].word_point === 0){
               const word = getRandomWord(level)
               checkCompleteWord(()=>{
                 setCurrentWord(word)
-                createNewFood(nextSnake, hasCollision[0].point, newScore, type, word)
+                createNewFood(nextSnake, collidedItem.point, newScore, type, word)
               }, ()=>{
                 setGameOver(true)
               })
             }
           }else{
-            createNewFood(nextSnake, hasCollision[0].point, newScore, type)
+            createNewFood(nextSnake, collidedItem.point, newScore, type)
           }
-          return newScore
-        })
-      }
-      setSnake(nextSnake)
     }
   
     const checkCompleteWord = (success, falied) => {
