@@ -31,9 +31,8 @@ function App() {
  const getLastHighScore = (email) => {
   fetch(`/.netlify/functions/score-board/${email}`).then((response)=>{
       response.json().then((json)=>{
-        console.log(json)
-        if(json.body.score){
-          setLastHighScore(response.body.score)
+        if(json.score > lastHighScore){
+          setLastHighScore(json.score)
         }
       })
   })

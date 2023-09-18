@@ -16,8 +16,9 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
 
     const showLeaderBoard = () => {
         fetch('/.netlify/functions/score-board').then((response)=>{
-            console.log(response.body.data)
-            setLeaderBoard(response.body)
+            response.json().then((json)=>{
+                setLeaderBoard(json.body)
+            })
         })
         setIsLBOpen(true)
         setIsDDOpen(false)
