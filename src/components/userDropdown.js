@@ -21,7 +21,7 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
                 setLeaderBoard(json)
             })
         })
-        setIsLBOpen(true)
+        setIsLBOpen(!isLBOpen)
         setIsDDOpen(false)
     }
     return (
