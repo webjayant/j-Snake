@@ -309,9 +309,9 @@ const JSnake = ({saveHighScore, isLoggedin, lastHighScore, setLastHighScore}) =>
                             Game Over
                         </p>
                         {score}
-                        {isLoggedin && <button className='btn' onClick={()=>saveHighScore(score)}>Join Leader Board</button>}
                     </div>:null
                 }
+                {isLoggedin && <button className='btn' onClick={()=>saveHighScore(score)}>Join Leader Board</button>}
                 <div className='btnContainer'>
                     {
                         config.game_types.map((item)=>{

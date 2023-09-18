@@ -22,7 +22,7 @@ const handler = async () => {
     console.log(ret, 'RET')
     return {
       statusCode: 200,
-      body: JSON.stringify(response),
+      body: JSON.stringify(ret),
     }
   } catch (error) {
     console.log('error', error)

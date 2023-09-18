@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react';
 const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
     const [isDDOpen, setIsDDOpen] = useState(false)
     const [highScore, setHighScore] = useState(localStorage.getItem("highScore"))
+    const [leaderBoard, setLeaderBoard] = useState([])
     const handleClick = () => {
         setIsDDOpen(!isDDOpen)
     }
@@ -13,7 +14,10 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
     },[localStorage.getItem("highScore")])
 
     const showLeaderBoard = () => {
-        
+        fetch('/.netlify/functions/score-board').then((response)=>{
+            console.log(response.body)
+            setLeaderBoard(response.body.data)
+        })
     }
     return (
         <>

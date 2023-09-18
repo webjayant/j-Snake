@@ -22,10 +22,7 @@ const createFaunaDB = async function () {
       query.CreateIndex({
         name: 'all_userScores',
         source: query.Collection('userScores'),
-        terms: [
-          {
-            field:  ["data","score"]
-          },
+        values: [
           {
             field: ["ref"]
           }
