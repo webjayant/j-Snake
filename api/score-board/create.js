@@ -13,7 +13,7 @@ const handler = async (event) => {
   const data = JSON.parse(event.body)
   console.log('Function `create` invoked', data)
   const item = {
-    data: data.body,
+    data: data,
   }
   /* construct the fauna query */
   try {
