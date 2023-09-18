@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 
 const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
     const [isDDOpen, setIsDDOpen] = useState(false)
+    const [isLBOpen, setIsLBOpen] = useState(false)
     const [highScore, setHighScore] = useState(localStorage.getItem("highScore"))
     const [leaderBoard, setLeaderBoard] = useState([])
     const handleClick = () => {
@@ -18,6 +19,8 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
             console.log(response.body)
             setLeaderBoard(response.body.data)
         })
+        setIsLBOpen(true)
+        setIsDDOpen(false)
     }
     return (
         <>
@@ -31,7 +34,13 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
                 <button className='btn linkBtn' onClick={()=>handleLogout()}>Logout</button>
                 <button className='btn linkBtn' onClick={()=>showLeaderBoard()}>Leader Board</button>
             </div>
-            
+            <div className={`userDropdown ${isLBOpen?'open':null}`}>
+                {
+                    leaderBoard.map((item)=>{
+                        return <li key={item.email}>{item.email}:{item.score}</li>
+                    })
+                }
+            </div>
         </>
     );
 };
