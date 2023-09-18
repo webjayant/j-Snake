@@ -22,7 +22,7 @@ function App() {
 
   fetch('/.netlify/functions/score-board', {
     method: 'POST',
-    body:JSON.stringify({email: currentUser.email, score: highScore})
+    body:JSON.stringify({email: currentUser.email, score: Number(highScore)})
   }).then((response)=>{
       console.log(response)
   })
@@ -30,11 +30,12 @@ function App() {
 
  const getLastHighScore = (email) => {
   fetch(`/.netlify/functions/score-board/${email}`).then((response)=>{
-      const json = response.json()
-      console.log(json)
-      if(response.body.score){
-        setLastHighScore(response.body.score)
-      }
+      response.json().then((json)=>{
+        console.log(json)
+        if(json.body.score){
+          setLastHighScore(response.body.score)
+        }
+      })
   })
  }
 
