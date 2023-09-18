@@ -8,6 +8,7 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
     const [leaderBoard, setLeaderBoard] = useState([])
     const handleClick = () => {
         setIsDDOpen(!isDDOpen)
+        setIsLBOpen(false)
     }
 
     useEffect(()=>{
@@ -37,8 +38,8 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
             </div>
             <div className={`userDropdown scoreBoard ${isLBOpen?'open':null}`}>
                 {
-                    leaderBoard.map((item)=>{
-                        return <li key={item.data.email}>{item.data.email}:{item.data.score}</li>
+                    leaderBoard.map((item, i)=>{
+                        return <li key={item.data.email}>{item.data.email} : {item.data.score} {i===0&&'🥇'}{i===1&&'🥈'}{i===2&&'🥉'}</li>
                     })
                 }
             </div>
