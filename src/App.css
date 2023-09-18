@@ -146,7 +146,7 @@ body{
 
 .userDropdown.scoreBoard{
   width: 400px;
-  right: 500px;
+  right: -500px;
   padding: 15px;
 }
 

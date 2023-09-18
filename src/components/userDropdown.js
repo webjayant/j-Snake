@@ -37,6 +37,7 @@ const UserDropdown = ({currentUser, handleLogout, isLoggedin}) => {
                 <button className='btn linkBtn' onClick={()=>showLeaderBoard()}>Leader Board</button>
             </div>
             <div className={`userDropdown scoreBoard ${isLBOpen?'open':null}`}>
+                <p>Leader Board</p>
                 {
                     leaderBoard.map((item, i)=>{
                         return <li key={item.data.email}>{item.data.email} : {item.data.score} {i===0&&'🥇'}{i===1&&'🥈'}{i===2&&'🥉'}</li>
