@@ -308,6 +308,7 @@ const JSnake = ({saveHighScore, isLoggedin, lastHighScore, setLastHighScore}) =>
                             Game Over
                         </p>
                         {score}
+                        {lastHighScore}
                         <p>{score>lastHighScore&&'New High Score 🎊 Login to join leader board'}</p>
                     </div>:null
                 }
