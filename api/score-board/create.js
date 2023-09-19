@@ -41,7 +41,7 @@ const handler = async (event) => {
         }
     } catch (error) {
         console.log(error, 'error after get')
-        if (error.errorType === 'NotFound') {
+        if (error.errorType === 'NotFound' || error.description === 'Set not found.') {
             try {
                 const createResponse = await client.query(
                     query.Create(query.Collection('userScores'), item)
