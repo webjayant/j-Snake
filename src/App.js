@@ -20,6 +20,9 @@ function App() {
  })
 
  const saveHighScore = (highScore) => {
+  if(highScore <=0){
+    return;
+  }
   setShowLoader(true)
   fetch('/.netlify/functions/score-board', {
     method: 'POST',

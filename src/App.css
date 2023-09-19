@@ -14,6 +14,7 @@ body{
   bottom: 0;
   background: #000000af;
   display: flex;
+  z-index: 999;
 }
 
 .loader {
