@@ -6,6 +6,37 @@ body{
   overflow-x: hidden;
 }
 
+.loader-container {
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom: 0;
+  background: #000000af;
+  display: flex;
+}
+
+.loader {
+  position: relative;
+  border: 16px solid #bf1e1e; 
+  border-top: 16px solid #28f740;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .header{
   height: 40px;
   width:100%;

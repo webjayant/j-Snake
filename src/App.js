@@ -10,6 +10,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(localStorage.getItem('currentUser'))
   const [isLoggedin, setIsLoggedin] = useState(false)
   const [lastHighScore, setLastHighScore] = useState(localStorage.getItem('highScore') || 0)
+  const [showLoader, setShowLoader] = useState(false)
 
   netlifyIdentity.on('login', ()=>{
     setIsLoggedin(true)
@@ -19,12 +20,13 @@ function App() {
  })
 
  const saveHighScore = (highScore) => {
-
+  setShowLoader(true)
   fetch('/.netlify/functions/score-board', {
     method: 'POST',
     body:JSON.stringify({email: currentUser.email, score: Number(highScore)})
   }).then((response)=>{
       console.log(response)
+      setShowLoader(false)
   })
  }
 
@@ -64,6 +66,9 @@ function App() {
 
   return(
     <>
+      {showLoader&&<div className="loader-container">
+        <div className="loader"></div>
+      </div>}
       <Header handleLogin={loginUser} handleLogout={logoutUser} currentUser={currentUser} isLoggedin={isLoggedin}/>
       <JSnake saveHighScore={saveHighScore} isLoggedin={isLoggedin} lastHighScore={lastHighScore} setLastHighScore={setLastHighScore}/>
     </>
