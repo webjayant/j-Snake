@@ -3,6 +3,7 @@ import JSnake from "./components/jSnake";
 import Header from "./components/Header";
 import { loginUser, logoutUser } from "./utils/netlifyIdentity";
 import netlifyIdentity from 'netlify-identity-widget'
+import {isMobile} from 'react-device-detect'
 import './App.css';
 
 
@@ -72,8 +73,14 @@ function App() {
       {showLoader&&<div className="loader-container">
         <div className="loader"></div>
       </div>}
-      <Header handleLogin={loginUser} handleLogout={logoutUser} currentUser={currentUser} isLoggedin={isLoggedin}/>
-      <JSnake saveHighScore={saveHighScore} isLoggedin={isLoggedin} lastHighScore={lastHighScore} setLastHighScore={setLastHighScore}/>
+      {
+        !isMobile?
+        <>
+          <Header handleLogin={loginUser} handleLogout={logoutUser} currentUser={currentUser} isLoggedin={isLoggedin}/>
+          <JSnake saveHighScore={saveHighScore} isLoggedin={isLoggedin} lastHighScore={lastHighScore} setLastHighScore={setLastHighScore}/>
+        </>
+        :<p style={{color:'#fff', textAlign:'center'}}>Mobile devices not supported, Please use PC</p>
+      }
     </>
   )
 }
